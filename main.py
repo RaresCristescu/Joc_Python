@@ -4,6 +4,10 @@ import random
 import math
 
 
+
+
+
+
 pygame.init()
 
 lungime=800
@@ -95,8 +99,9 @@ def gameLoop():
         lead_x += lead_x_change
         lead_y+=lead_y_change
         gameScreen.fill(white)
+        size_of_mar=40
         pygame.draw.rect(gameScreen,red,(marX,marY,size_of_block,size_of_block))
-        pygame.display.update()
+        # pygame.display.update()
 
 
         snakeHead=[]
@@ -112,11 +117,17 @@ def gameLoop():
 
         sarpe(snakeList,size_of_block)
         pygame.display.update()
-        if lead_x==marX and lead_y==marY:
-            marX = round(random.randrange(0, lungime - size_of_block) / size_of_block) * size_of_block
-            marY = round(random.randrange(0, inaltime - size_of_block) / size_of_block) * size_of_block
-            snakeLenght+=1
+        if lead_x>marX and lead_x<marX+size_of_mar or lead_x+size_of_block>marX and lead_x+size_of_block<marX+size_of_mar:
+            if lead_y>marY and lead_y<marY+size_of_mar :
+                marX = round(random.randrange(0, lungime - size_of_block))
+                marY = round(random.randrange(0, inaltime - size_of_block))
+                snakeLenght+=1
+            elif lead_y+size_of_block>marY and lead_y+size_of_block<marY+size_of_mar:
+                marX = round(random.randrange(0, lungime - size_of_block))
+                marY = round(random.randrange(0, inaltime - size_of_block))
+                snakeLenght+=1
         clock.tick(FPS)
+
 
 
 
